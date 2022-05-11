@@ -16,6 +16,7 @@ const struct group_opt_templ all_cmd_options[] = {
     {"parse-tree-too", NULL, "show parse tree and verify"},
     {"goto-functions-only", NULL, "only show goto program"},
     {"goto-functions-too", NULL, "show goto program and verify"},
+    {"goto-fuzz", NULL, "developing"},
     {"program-only", NULL, "only show program expression"},
     {"program-too", NULL, "show program expression and verify"},
     {"ssa-symbol-table", NULL, "show symbol table along with SSA"},

@@ -1695,6 +1695,10 @@ bool esbmc_parseoptionst::process_goto_program(
       if(cmdline.isset("goto-functions-only"))
         return true;
     }
+    if(cmdline.isset("goto-fuzz"))
+    {
+      mutateOrder(goto_functions,ns,msg);
+    }
   }
 
   catch(const char *e)

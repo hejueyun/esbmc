@@ -15,6 +15,7 @@ Author: Daniel Kroening, kroening@kroening.com
 #include <util/cmdline.h>
 #include <util/options.h>
 #include <util/parseoptions.h>
+#include <goto-programs/goto_mutation.h>
 
 extern const struct group_opt_templ all_cmd_options[];
 
