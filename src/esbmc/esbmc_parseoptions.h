@@ -85,7 +85,7 @@ protected:
 
   FILE *out = stdout;
   FILE *err = stderr;
-
+  
 private:
   void close_file(FILE *f)
   {
@@ -100,3 +100,7 @@ public:
 };
 
 #endif
+
+
+int LLVMTestOneInput(const uint8_t *Data, size_t Size);
+int LLVMFuzzerRunDriver(int *argc, char ***argv, int (*UserCb)(const uint8_t *Data, size_t Size));

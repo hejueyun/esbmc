@@ -4,6 +4,7 @@
 cmake_minimum_required (VERSION 3.7)
 project (ESBMC)
 
+
 set (ESBMC_VERSION_MAJOR 6)
 set (ESBMC_VERSION_MINOR 9)
 set (ESBMC_VERSION_PATCH 0)
@@ -45,13 +46,17 @@ include(AppleConfiguration)
 include(InstallFiles)
 include(Sanitizers)
 include(ClangTidy)
-include(Coverage)
+
 
 if(BUILD_STATIC)
   include(BuildStatic)
 endif()
 
 include(ExternalDependencies)
+
+include(Coverage)
+
+
 
 # Copied from https://stackoverflow.com/questions/53877344/cannot-configure-cmake-to-look-for-homebrew-installed-version-of-bison
 # On macOS, search Homebrew for keg-only versions of Bison and Flex. Xcode does

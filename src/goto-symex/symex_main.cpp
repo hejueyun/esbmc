@@ -345,6 +345,7 @@ void goto_symext::symex_step(reachability_treet &art)
 
   default:
     std::ostringstream oss;
+    instruction.dump();
     oss << "GOTO instruction type " << instruction.type;
     oss << " not handled in goto_symext::symex_step"
         << "\n";

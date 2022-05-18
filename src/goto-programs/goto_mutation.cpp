@@ -4,17 +4,17 @@
 using u32 = uint_least32_t;
 using engine = std::mt19937;
 
-void mutateOrder(goto_functionst &func, const namespacet &ns, messaget &msg)
+void mutateOrder(const uint8_t *data, size_t size,goto_functionst &func, messaget &msg)
 {
-  char data[100];
-  std::random_device os_seed;
-  const u32 seed = os_seed();
+  // char data[100];
+  // std::random_device os_seed;
+  // const u32 seed = os_seed();
 
-  engine generator(seed);
-  std::uniform_int_distribution<u32> distribute(1, 6);
-  for(auto d : data){
-    d=char(distribute(generator));
-  }
+  // engine generator(seed);
+  // std::uniform_int_distribution<u32> distribute(1, 100);
+  // for(auto d : data){
+  //   d=char(distribute(generator));
+  // }
   // for(int i = 0; i < 50; i++)
   // {
   //   data[i] = char(i + i);
@@ -31,7 +31,7 @@ void mutateOrder(goto_functionst &func, const namespacet &ns, messaget &msg)
     int program_len = mmain.instructions.size();
 
     os<<"Fuzz Begin\n";
-    while(cnt <= 31 && cnt < sizeof(data) / sizeof(data[0]))
+    while(cnt <= 21 && cnt < sizeof(data) / sizeof(data[0]))
     {
       int ran1 = ((int)data[cnt]) % program_len; // convert to integer
       cnt++;

@@ -7,7 +7,6 @@
 //   const uint8_t *data,
 //   size_t size);
 
-void mutateOrder(
+void mutateOrder(const uint8_t *data, size_t size,
   goto_functionst &func,
-  const namespacet &ns,
   messaget &msg);

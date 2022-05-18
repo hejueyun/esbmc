@@ -73,6 +73,10 @@ extern "C"
 
 #include <util/message/default_message.h>
 
+static goto_functionst func;
+static messaget msgt;
+
+
 enum PROCESS_TYPE
 {
   BASE_CASE,
@@ -1565,6 +1569,8 @@ bool esbmc_parseoptionst::read_goto_binary(goto_functionst &goto_functions)
   return false;
 }
 
+
+
 bool esbmc_parseoptionst::process_goto_program(
   optionst &options,
   goto_functionst &goto_functions)
@@ -1695,9 +1701,16 @@ bool esbmc_parseoptionst::process_goto_program(
       if(cmdline.isset("goto-functions-only"))
         return true;
     }
+    
     if(cmdline.isset("goto-fuzz"))
     {
-      mutateOrder(goto_functions,ns,msg);
+      int x;
+      char **y;
+      func=goto_functions;
+      msgt=msg;
+      LLVMFuzzerRunDriver(&x, &y, LLVMTestOneInput);
+      goto_functions=func;
+      msg=msgt;
     }
   }
 
@@ -1743,6 +1756,7 @@ int esbmc_parseoptionst::do_bmc(bmct &bmc)
   return res;
 }
 
+
 void esbmc_parseoptionst::help()
 {
   default_message dmsg;
@@ -1751,4 +1765,8 @@ void esbmc_parseoptionst::help()
   std::ostringstream oss;
   oss << cmdline.cmdline_options;
   dmsg.status(oss.str());
+}
+
+int LLVMTestOneInput(const uint8_t *Data, size_t Size){
+  mutateOrder(Data,Size,func,msgt);
 }
