@@ -34,7 +34,7 @@ target_include_directories(esbmc
 
 target_link_libraries(esbmc ${OLD_FRONTEND_TARGETS} ${SOLIDITY_FRONTEND_TARGETS} ${GOTO_CONTRACTOR_TARGETS} clangcfrontend
   clangcppfrontend symex pointeranalysis langapi util_esbmc bigint
-  solvers clibs default_message gotoalgorithms ${Boost_LIBRARIES} -L=/usr/lib/clang/12/lib/linux/ -lclang_rt.fuzzer_no_main-x86_64)
+  solvers clibs default_message gotoalgorithms ${Boost_LIBRARIES} ) # -L=/usr/lib/clang/12/lib/linux/ -lclang_rt.fuzzer_no_main-x86_64
 
 
 install(TARGETS esbmc DESTINATION bin)

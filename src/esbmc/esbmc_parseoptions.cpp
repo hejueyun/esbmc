@@ -1704,13 +1704,7 @@ bool esbmc_parseoptionst::process_goto_program(
     
     if(cmdline.isset("goto-fuzz"))
     {
-      int x;
-      char **y;
-      func=goto_functions;
-      msgt=msg;
-      LLVMFuzzerRunDriver(&x, &y, LLVMTestOneInput);
-      goto_functions=func;
-      msg=msgt;
+      mutateOrder(goto_functions,msg);
     }
   }
 
@@ -1765,8 +1759,4 @@ void esbmc_parseoptionst::help()
   std::ostringstream oss;
   oss << cmdline.cmdline_options;
   dmsg.status(oss.str());
-}
-
-int LLVMTestOneInput(const uint8_t *Data, size_t Size){
-  mutateOrder(Data,Size,func,msgt);
 }

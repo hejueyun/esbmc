@@ -4,21 +4,11 @@
 using u32 = uint_least32_t;
 using engine = std::mt19937;
 
-void mutateOrder(const uint8_t *data, size_t size,goto_functionst &func, messaget &msg)
+void mutateOrder(
+  goto_functionst &func,
+  messaget &msg)
 {
-  // char data[100];
-  // std::random_device os_seed;
-  // const u32 seed = os_seed();
-
-  // engine generator(seed);
-  // std::uniform_int_distribution<u32> distribute(1, 100);
-  // for(auto d : data){
-  //   d=char(distribute(generator));
-  // }
-  // for(int i = 0; i < 50; i++)
-  // {
-  //   data[i] = char(i + i);
-  // }
+  char data[100];
 
   int cnt = 0;
   // get "main"
@@ -30,12 +20,23 @@ void mutateOrder(const uint8_t *data, size_t size,goto_functionst &func, message
     goto_programt &mmain = m_it->second.body;
     int program_len = mmain.instructions.size();
 
-    os<<"Fuzz Begin\n";
+    char data[program_len];
+    std::random_device os_seed;
+    const u32 seed = os_seed();
+
+    engine generator(seed);
+    std::uniform_int_distribution<u32> distribute(1, 100);
+    for(auto d : data)
+    {
+      d = char(distribute(generator));
+    }
+
     while(cnt <= 21 && cnt < sizeof(data) / sizeof(data[0]))
     {
       int ran1 = ((int)data[cnt]) % program_len; // convert to integer
       cnt++;
-      if(cnt > 11) break;
+      if(cnt > 11)
+        break;
       int ran2 = ((int)data[cnt]) % program_len;
       cnt++;
       int cnt_loop = 0;
@@ -74,9 +75,9 @@ void mutateOrder(const uint8_t *data, size_t size,goto_functionst &func, message
         cnt_loop++;
       }
     }
-    os<<"Fuzz End\n";
+    os << "Fuzz End\n";
 
-    os<<"Show modified\n";
+    os << "Show modified\n";
     os.clear();
     Forall_goto_program_instructions(it, mmain)
     {
